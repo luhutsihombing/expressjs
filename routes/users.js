@@ -1,14 +1,14 @@
-var express = require('express');
-var crypto = require('crypto');
-var User = require('../models/user');
-var Auth_mdw = require('../middlewares/auth');
+var express     = require('express');
+var crypto      = require('crypto');
+var User        = require('../models/user');
+var Auth_mdw    = require('../middlewares/auth');
 
 var router = express.Router();
-var secret = 'codepolitan';
+var secret = 'luhutsihombing';
 var session_store;
 
 var default_password = crypto.createHmac('sha256', secret)
-                   .update('default')
+                   .update('password123')
                    .digest('hex');
 
 router.get('/', Auth_mdw.check_login, Auth_mdw.is_admin, function(req, res, next) {
@@ -16,23 +16,23 @@ router.get('/', Auth_mdw.check_login, Auth_mdw.is_admin, function(req, res, next
 
     User.find({}, function(err, user){
         console.log(user);
-        res.render('users/index', { session_store:session_store, users: user });
+        res.render('users/index', { title: 'Table Users - ExpressJS Series',session_store:session_store, users: user });
     }).select('username email firstname lastname admin createdAt updatedAt');
 });
 
 router.get('/add', Auth_mdw.check_login, Auth_mdw.is_admin, function(req, res, next) {
     session_store = req.session;
 
-    res.render('users/add', { session_store:session_store });
+    res.render('users/add', { title: 'Table Users - ExpressJS Series',session_store:session_store });
 });
 
 router.post('/add', Auth_mdw.check_login, Auth_mdw.is_admin, function (req, res, next){
     session_store = req.session;
 
-    req.assert('username', 'Nama diperlukan').isAlpha().withMessage('Username harus terdiri dari angka dan huruf').notEmpty();
-    req.assert('email', 'E-mail tidak valid').notEmpty().withMessage('E-mail diperlukan').isEmail();
-    req.assert('firstname', 'Nama depan harus terdiri dari angka dan huruf').isAlpha();
-    req.assert('lastname', 'Nama belakang harus terdiri dari angka dan huruf').isAlpha();
+    req.assert('username', 'username required').isAlpha().withMessage('Username only numeric and alphabet').notEmpty();
+    req.assert('email', 'E-mail not valid').notEmpty().withMessage('E-mail required').isEmail();
+    req.assert('firstname', 'firstname use number and alphabet').isAlpha();
+    req.assert('lastname', 'lastname use number and alphabet').isAlpha();
 
     var errors = req.validationErrors();  
     console.log(errors);
@@ -62,19 +62,19 @@ router.post('/add', Auth_mdw.check_login, Auth_mdw.is_admin, function (req, res,
                     {
                         console.log(err);
 
-                        req.flash('msg_error', 'Punten, sepertinya ada masalah dengan sistem kami...');
+                        req.flash('msg_error', 'Sorry, our system is problem...');
                         res.redirect('/users');
                     }
                     else
                     {
-                        req.flash('msg_info', 'User berhasil dibuat...');
+                        req.flash('msg_info', 'User success created...');
                         res.redirect('/users');
                     }
                 });
             }
             else
             {
-                req.flash('msg_error', 'Punten, username sudah digunakan...');
+                req.flash('msg_error', 'Sorry, username already used...');
                 res.render('users/add', { 
                     session_store:session_store,
                     username: req.param('username'),
@@ -88,7 +88,7 @@ router.post('/add', Auth_mdw.check_login, Auth_mdw.is_admin, function (req, res,
     else
     {   
         // menampilkan pesan error
-        errors_detail = "<p>Punten, sepertinya ada salah pengisian, mangga check lagi formnyah!</p><ul>";
+        errors_detail = "<p>Sorry, field require enter please check again!</p><ul>";
 
         for (i in errors)
         {
@@ -118,11 +118,11 @@ router.get('/edit/(:id)', Auth_mdw.check_login, Auth_mdw.is_admin, function(req,
         {
             console.log(user);
 
-            res.render('users/edit', { session_store:session_store, user: user });
+            res.render('users/edit', { title: 'Table Users - ExpressJS Series',session_store:session_store, user: user });
         }
         else
         {
-            req.flash('msg_error', 'Punten, user tidak ditemukan!');
+            req.flash('msg_error', 'Sorry, user not found!');
             res.redirect('/users');
         }
     });
@@ -131,10 +131,10 @@ router.get('/edit/(:id)', Auth_mdw.check_login, Auth_mdw.is_admin, function(req,
 router.put('/edit/(:id)', Auth_mdw.check_login, Auth_mdw.is_admin, function (req, res, next){
     session_store = req.session;
 
-    req.assert('username', 'Nama diperlukan').isAlpha().withMessage('Username harus terdiri dari angka dan huruf').notEmpty();
-    req.assert('email', 'E-mail tidak valid').notEmpty().withMessage('E-mail diperlukan').isEmail();
-    req.assert('firstname', 'Nama depan harus terdiri dari angka dan huruf').isAlpha();
-    req.assert('lastname', 'Nama belakang harus terdiri dari angka dan huruf').isAlpha();
+    req.assert('username', 'username required').isAlpha().withMessage('Username only number and alphabet').notEmpty();
+    req.assert('email', 'E-mail not valid').notEmpty().withMessage('E-mail required').isEmail();
+    req.assert('firstname', 'firstname use number and alphabet').isAlpha();
+    req.assert('lastname', 'lastname use number and alphabet').isAlpha();
 
     var errors = req.validationErrors();  
     console.log(errors);
@@ -158,11 +158,11 @@ router.put('/edit/(:id)', Auth_mdw.check_login, Auth_mdw.is_admin, function (req
             user.save(function(err, user){
                 if (err) 
                 {
-                    req.flash('msg_error', 'Punten, sepertinya ada masalah dengan sistem kami...');
+                    req.flash('msg_error', 'Sorry, our system is problem...');
                 }
                 else
                 {
-                    req.flash('msg_info', 'Edit user berhasil!');
+                    req.flash('msg_info', 'Edit user success!');
                 }
 
                 res.redirect('/users/edit/'+req.params.id);
@@ -173,7 +173,7 @@ router.put('/edit/(:id)', Auth_mdw.check_login, Auth_mdw.is_admin, function (req
     else
     {   
         // menampilkan pesan error
-        errors_detail = "<p>Punten, sepertinya ada salah pengisian, mangga check lagi formnyah!</p><ul>";
+        errors_detail = "<p>Sorry, problem your fill, please check again !</p><ul>";
 
         for (i in errors)
         {
@@ -202,11 +202,11 @@ router.delete('/delete/(:id)', Auth_mdw.check_login, Auth_mdw.is_admin, function
         user.remove(function(err, user){
             if (err) 
             {
-                req.flash('msg_error', 'Punten, sepertinya user yang dimaksud sudah tidak ada. Dan kebetulan lagi ada masalah sama sistem kami :D');
+                req.flash('msg_error', 'Sorry, user not found and system is down');
             }
             else
             {
-                req.flash('msg_info', 'Hapus user berhasil!');
+                req.flash('msg_info', 'Deleted user success!');
             }
             res.redirect('/users');
         });
