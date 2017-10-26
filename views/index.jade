@@ -1,0 +1,23 @@
+extends layout/base
+block content  
+    row
+        div.row.top_tiles
+        div.col-md-12.col-sm-12.scol-xs-12
+            div.dashboard_graph
+                div.row.x_title
+                    div.col-md-12
+                        h3 Network Activities
+                div.col-md-12
+                    - if (messages.info)
+                        .alert.alert-danger.alert-dismissable
+                            button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
+                            | #{messages.info}
+                    div.x_content
+                        div.col-md-3.col-sm-3.col-xs-12.profile_left
+                            div.profile_img
+                                .crop-avatar
+                                    img.img-responsive.avatar-view#IdName(src="/gentelella/production/images/picture.jpg" alt="Avatar" title="Change the avatar")
+                                    h3 Samuel Doe
+                        div.col-md-3.col-sm-3.col-xs-6.tile
+                            span Total Sessions
+                            h2 231,809

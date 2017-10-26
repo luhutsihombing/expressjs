@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title ExpressJS | Login
+    meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', name='viewport')
+    link(href='/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet', type='text/css')
+    link(href='/gentelella/vendors/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='/gentelella/vendors/nprogress/nprogress.css', rel='stylesheet', type='text/css')
+    link(href='/gentelella/vendors/animate.css/animate.min.css', rel='stylesheet', type='text/css')
+    link(href='/gentelella/build/css/custom.min.css', rel='stylesheet', type='text/css')
+    body.login
+      .boxbelum
+        .login_wrapper
+          .animate.form.login_form
+            section.login_content
+              form(action='/login/', method='POST', role='form')
+                h1 Login here
+                .logalert
+                  - if (messages.info)
+                    .alert.alert-danger.alert-dismissable
+                      button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
+                      | #{messages.info}
+                .loginhere
+                  input.form-control(type='text', placeholder='Username', name='username', value='', required='')
+                .loginhere
+                  input.form-control(type='password', placeholder='password', name='password', value='', required='')
+                .logbutton
+                  button.btn.btn-success.btn-lg.btn-flat.form-control(type='submit',style='padding-top: 5px;') Log In
+                .separator
+                  .sep
+                    p ©2017 All Rights Reserved. Luhut001@gmail.com

@@ -1,0 +1,34 @@
+div.col-md-3.left_col
+    div.left_col.scroll-view
+        div.navbar.nav_title
+            a(href='/').site_title
+                span Dashboard
+        div.clearfix
+        div.profile.clearfix
+            div.profile_pic
+                img.img-circle.profile_img(src='/gentelella/production/images/img.jpg', alt='User Image')
+            div.profile_info
+                span Welcome,
+                h2 John Doe
+        br
+        div.main_menu_side.hidden-print.main_menu#sidebar-menu
+           div.menu_section
+               h3 General
+               ul.nav.side-menu
+                   li.active
+                        a Home
+                            span.fafa-chevron-down
+                        ul(style='display: block;').nav.child_menu
+                            li
+                                a(href='/') Home
+                            li
+                                a(href='/users') Users
+        div.sidebar-footer.hidden-small
+            a(href='/logout', data-toggle='tooltip', title='Logout') Logout
+                span.glyphicon.glyphicon-off(aria-hidden='true')
+            a(href='/logout', data-toggle='tooltip', title='Profile') Profile
+                span.glyphicon.glyphicon-eye-close(aria-hidden='true')
+            a(href='/logout', data-toggle='tooltip', title='Full') Screen
+                span.glyphicon.glyphicon-fullscreen(aria-hidden='true')
+            a(href='/logout', data-toggle='tooltip', title='Setting') Setting
+                span.glyphicon.glyphicon-cog(aria-hidden='true')

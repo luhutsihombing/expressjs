@@ -1,0 +1,16 @@
+doctype html
+html
+    title #{title}
+    head
+        include head2.jade
+    body.nav-md
+        div.container.body
+            div.main_container
+                include nav2.jade
+                include sidebar.jade
+
+                div.right_col
+                 block content
+                include footer2.jade
+
+            include js2.jade
