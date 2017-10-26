@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 
-var secret = 'codepolitan';
+var secret = 'luhutsihombing';
 var password = crypto.createHmac('sha256', secret)
-                   .update('rahasia123')
+                   .update('password123')
                    .digest('hex');
 
 console.log("Password: " + password);
@@ -12,15 +12,15 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/luhut', { useMongoClient: true });
 var User = require('../models/user');
 
-User.find({username:'superadmin'}, function (err, user){
+User.find({username:'poweradmin'}, function (err, user){
     if (user.length == 0)
     {
         var admin = new User({
-            username: 'superadmin',
-            email: 'admin@example.com',
+            username: 'poweradmin',
+            email: 'admin@gmail.com',
             password: password,
-            firstname: 'super',
-            lastname: 'admin',
+            firstname: 'Power',
+            lastname: 'Admin',
             admin: true,
         });
 
@@ -32,15 +32,15 @@ User.find({username:'superadmin'}, function (err, user){
     }
 });
 
-User.find({username:'supermember'}, function (err, user){
+User.find({username:'powermember'}, function (err, user){
     if (user.length == 0)
     {
         var member = new User({
-            username: 'supermember',
-            email: 'member@example.com',
+            username: 'powermember',
+            email: 'member@gmail.com',
             password: password,
-            firstname: 'super',
-            lastname: 'member',
+            firstname: 'Power',
+            lastname: 'Member',
             admin: false,
         });
 
