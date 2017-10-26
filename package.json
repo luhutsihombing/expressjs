@@ -1,0 +1,30 @@
+{
+  "name": "package1",
+  "version": "1.0.0",
+  "description": "mean stack dev",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "keywords": [
+    "luhut",
+    "sihombing"
+  ],
+  "author": "luhut001@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-flash": "git://github.com/RGBboy/express-flash.git",
+    "express-session": "^1.15.6",
+    "express-sessions": "^1.0.6",
+    "express-validation": "^1.0.2",
+    "express-validator": "^4.2.1",
+    "gentelella": "^1.3.0",
+    "jade": "^1.11.0",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0",
+    "multer": "^1.3.0"
+  }
+}
